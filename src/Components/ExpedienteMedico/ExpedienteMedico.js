@@ -123,7 +123,7 @@ class ExpedienteMedico extends Component {
 	};
 
 	updateDB = () => {
-		fetch("http://fundacionlaika.org:3001/expedienteMedico", {
+		fetch("http://fundacionlaika.org/expedienteMedico", {
 			method: "put",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(this.state),
@@ -156,7 +156,7 @@ class ExpedienteMedico extends Component {
 			});
 		}
 
-		fetch("http://fundacionlaika.org:3001/expedienteMedico/?id=" + params.id, {
+		fetch("http://fundacionlaika.org/expedienteMedico/?id=" + params.id, {
 			method: "get",
 			headers: { "Content-Type": "application/json" },
 		})

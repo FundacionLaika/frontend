@@ -7,7 +7,7 @@ import SecurityInfo from "./Subcomponents/SecurityInfo";
 import AdminInfo from "./Subcomponents/AdminInfo";
 
 async function fetchUser(ID_Usuario) {
-	var response = await fetch("http://fundacionlaika.org:3001/usuario", {
+	var response = await fetch("http://fundacionlaika.org/usuario", {
 		method: "post",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify({ ID_Usuario }),
