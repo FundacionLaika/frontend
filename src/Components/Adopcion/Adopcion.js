@@ -57,7 +57,7 @@ class Adopcion extends React.Component {
 	};
 
 	updateDB = () => {
-		fetch("http://localhost:3001/adopcion", {
+		fetch("http://fundacionlaika.org:3001/adopcion", {
 			method: "put",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(this.state),
@@ -121,7 +121,7 @@ class Adopcion extends React.Component {
 			});
 		}
 
-		fetch("http://localhost:3001/adopcion/?id=" + params.id, {
+		fetch("http://fundacionlaika.org:3001/adopcion/?id=" + params.id, {
 			method: "get",
 			headers: { "Content-Type": "application/json" },
 		})

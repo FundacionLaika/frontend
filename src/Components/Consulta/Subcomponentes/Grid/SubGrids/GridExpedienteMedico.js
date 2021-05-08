@@ -7,7 +7,7 @@ export default class GridExpedienteMedico extends React.Component {
         data: [],
     };
     fetchData = () => {
-        fetch("http://localhost:3001/consulta", {
+        fetch("http://fundacionlaika.org:3001/consulta", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(this.props.filtros),
