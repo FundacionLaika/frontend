@@ -19,7 +19,7 @@ var data = {
 
 async function fetchData(registro, id) {
 	var response = await fetch(
-		"http://fundacionlaika.org/" + registro + "/?id=" + id,
+		"https://fundacionlaika.org/" + registro + "/?id=" + id,
 		{
 			method: "get",
 			headers: { "Content-Type": "application/json" },

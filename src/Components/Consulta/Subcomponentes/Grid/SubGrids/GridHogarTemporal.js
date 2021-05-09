@@ -8,7 +8,7 @@ export default class GridHogarTemporal extends React.Component {
     };
 
     fetchData = () => {
-        fetch("http://fundacionlaika.org/consulta", {
+        fetch("https://fundacionlaika.org/consulta", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(this.props.filtros),

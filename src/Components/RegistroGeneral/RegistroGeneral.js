@@ -59,7 +59,7 @@ class RegistroGeneral extends React.Component {
     };
 
     insertDB = () => {
-        fetch("http://fundacionlaika.org/registroGeneral", {
+        fetch("https://fundacionlaika.org/registroGeneral", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(this.state),
@@ -74,7 +74,7 @@ class RegistroGeneral extends React.Component {
     };
 
     updateDB = () => {
-        fetch("http://fundacionlaika.org/registroGeneral", {
+        fetch("https://fundacionlaika.org/registroGeneral", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(this.state),
@@ -150,7 +150,7 @@ class RegistroGeneral extends React.Component {
         });
 		
 
-        fetch("http://fundacionlaika.org/registroGeneral/?id=" + params.id, {
+        fetch("https://fundacionlaika.org/registroGeneral/?id=" + params.id, {
             method: "get",
             headers: { "Content-Type": "application/json" },
         })
