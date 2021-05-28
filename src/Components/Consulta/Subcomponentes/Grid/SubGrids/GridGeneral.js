@@ -8,7 +8,7 @@ export default class GridGeneral extends React.Component {
     };
 
     fetchData = () => {
-        fetch("https://fundacionlaika.herokuapp.com//consulta", {
+        fetch("https://fundacionlaika.herokuapp.com/consulta", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(this.props.filtros),

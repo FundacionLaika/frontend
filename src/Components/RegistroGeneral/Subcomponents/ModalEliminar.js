@@ -39,7 +39,7 @@ const ModalExampleSize = (props) => {
 
     async function deleteAnimal(animalID) {
         console.log("id animal", animalID);
-        var response = await fetch("https://fundacionlaika.herokuapp.com//eliminarAnimal", {
+        var response = await fetch("https://fundacionlaika.herokuapp.com/eliminarAnimal", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ ID_Animal: animalID }),
