@@ -1,6 +1,7 @@
 import React from "react";
 import TarjetaAdopcion from "../Tarjetas/TarjetaAdopcion";
 import "./Styles/Subgrid.css";
+import api from "../../../../SharedComponents/APIConfig";
 
 export default class GridAdopcion extends React.Component {
     state = {
@@ -8,7 +9,7 @@ export default class GridAdopcion extends React.Component {
     };
 
     fetchData = () => {
-        fetch("https://fundacionlaika.herokuapp.com/consulta", {
+        fetch(api.url + "/consulta", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(this.props.filtros),

@@ -13,6 +13,7 @@ import AlertTitle from "@material-ui/lab/AlertTitle";
 import Collapse from "@material-ui/core/Collapse";
 import Alert from "@material-ui/lab/Alert";
 import ErrorPage from "../SharedComponents/ErrorPage";
+import api from "../SharedComponents/APIConfig";
 
 class RegistroGeneral extends React.Component {
     state = {
@@ -59,7 +60,7 @@ class RegistroGeneral extends React.Component {
     };
 
     insertDB = () => {
-        fetch("https://fundacionlaika.herokuapp.com/registroGeneral", {
+        fetch(api.url + "/registroGeneral", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(this.state),
@@ -67,14 +68,17 @@ class RegistroGeneral extends React.Component {
             .then((response) => response.json())
             .then((ID_Animal) => {
                 console.log(ID_Animal);
-                this.props.location.search = "/Laika/RegistroGeneral?id='+ID_Animal";
-                this.props.history.push('/Laika/RegistroGeneral?id='+ID_Animal);
+                this.props.location.search =
+                    "/Laika/RegistroGeneral?id='+ID_Animal";
+                this.props.history.push(
+                    "/Laika/RegistroGeneral?id=" + ID_Animal
+                );
             })
             .catch((err) => console.log(err));
     };
 
     updateDB = () => {
-        fetch("https://fundacionlaika.herokuapp.com/registroGeneral", {
+        fetch(api.url + "/registroGeneral", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(this.state),
@@ -132,8 +136,8 @@ class RegistroGeneral extends React.Component {
                 foto: null,
                 rescatistas: [],
                 showErrorPage: false,
-              
-              	openError: false,
+
+                openError: false,
                 openSuccess: false,
                 msg: "",
             });
@@ -144,13 +148,11 @@ class RegistroGeneral extends React.Component {
         let url = this.props.location.search;
         let params = queryString.parse(url);
 
-        
         this.setState({
-            id: params.id
+            id: params.id,
         });
-		
 
-        fetch("https://fundacionlaika.herokuapp.com/registroGeneral/?id=" + params.id, {
+        fetch(api.url + "/registroGeneral/?id=" + params.id, {
             method: "get",
             headers: { "Content-Type": "application/json" },
         })
@@ -187,8 +189,6 @@ class RegistroGeneral extends React.Component {
             })
             .catch((err) => console.log(err));
     };
-
-
 
     componentDidUpdate() {
         let url = this.props.location.search;
@@ -250,7 +250,10 @@ class RegistroGeneral extends React.Component {
                 ) : null}
 
                 <div
-                    className="FormularioGeneral" style={{height: this.estaRegistrado ? "80vh" : "85.98245614vh"}}
+                    className="FormularioGeneral"
+                    style={{
+                        height: this.estaRegistrado ? "80vh" : "85.98245614vh",
+                    }}
                 >
                     <div className="alertRG">
                         <Collapse in={this.state.openError}>
@@ -374,7 +377,9 @@ class RegistroGeneral extends React.Component {
                         {this.estaRegistrado ? "Guardar" : "Registrar"}
                         <i aria-hidden="true" className="fa fa-save fa-fw"></i>
                     </button>
-                    {this.estaRegistrado ? <ModalEliminar idAnimal={this.state.id}/> : null}
+                    {this.estaRegistrado ? (
+                        <ModalEliminar idAnimal={this.state.id} />
+                    ) : null}
 
                     <Link
                         to={
@@ -404,6 +409,5 @@ class RegistroGeneral extends React.Component {
             </div>
         );
     }
-
 }
 export default withRouter(RegistroGeneral);

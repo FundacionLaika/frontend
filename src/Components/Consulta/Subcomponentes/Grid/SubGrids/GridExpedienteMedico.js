@@ -1,21 +1,22 @@
 import React from "react";
 import TarjetaExpedienteMedico from "../Tarjetas/TarjetaExpedienteMedico";
 import "./Styles/Subgrid.css";
+import api from "../../../../SharedComponents/APIConfig";
 
 export default class GridExpedienteMedico extends React.Component {
     state = {
         data: [],
     };
     fetchData = () => {
-        fetch("https://fundacionlaika.herokuapp.com/consulta", {
+        fetch(api.url + "/consulta", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(this.props.filtros),
         })
             .then((response) => {
-				if (response.ok) return response.json();
-				else return [];
-			})
+                if (response.ok) return response.json();
+                else return [];
+            })
             .then((response) => {
                 this.setState({
                     data: response,

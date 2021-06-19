@@ -11,9 +11,10 @@ import {
 } from "semantic-ui-react";
 import "../Styles/ModalAdmin.css";
 import FotoUsuarioModal from "./FotoUsuarioModal";
+import api from "../../SharedComponents/APIConfig";
 
 async function fetchUser(userID) {
-    var response = await fetch("https://fundacionlaika.herokuapp.com/usuario", {
+    var response = await fetch(api.url + "/usuario", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ID_Usuario: userID }),
@@ -31,7 +32,7 @@ async function fetchUser(userID) {
 }
 
 async function updateUser(userID, userData, modifyUser) {
-    var response = await fetch("https://fundacionlaika.herokuapp.com/usuario", {
+    var response = await fetch(api.url + "/usuario", {
         method: "put",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ID_Usuario: userID, ...userData }),
@@ -44,7 +45,7 @@ async function updateUser(userID, userData, modifyUser) {
 }
 
 async function createUser(userData, addUser) {
-    var response = await fetch("https://fundacionlaika.herokuapp.com/signup", {
+    var response = await fetch(api.url + "/signup", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
@@ -72,11 +73,11 @@ function ModalAdmin(props) {
 
     const [secondOpen, setSecondOpen] = React.useState(false);
 
-	const [message, setMessage] = React.useState("");
-	
-	const [success, setSuccess] = React.useState(true);
+    const [message, setMessage] = React.useState("");
 
-   const [stateUser, setStateUser] = useState({
+    const [success, setSuccess] = React.useState(true);
+
+    const [stateUser, setStateUser] = useState({
         nombre: "",
         apellidos: "",
         correo: "",
@@ -101,7 +102,7 @@ function ModalAdmin(props) {
         setStateUser({ ...stateUser, rol: data.value });
     }
 
-    useEffect(() => {           
+    useEffect(() => {
         if (!props.userID) return;
         async function fetchData() {
             const userData = await fetchUser(props.userID);
@@ -173,7 +174,8 @@ function ModalAdmin(props) {
                         <div className="containerUserRG">
                             <div className="blockModal">
                                 <div className="block1RG">
-                                    <Input autoComplete="off"
+                                    <Input
+                                        autoComplete="off"
                                         size="large"
                                         icon="address card"
                                         iconPosition="left"
@@ -184,7 +186,8 @@ function ModalAdmin(props) {
                                     />
                                 </div>
                                 <div className="block2RG">
-                                    <Input autoComplete="off"
+                                    <Input
+                                        autoComplete="off"
                                         size="large"
                                         icon="address book"
                                         iconPosition="left"
@@ -198,7 +201,8 @@ function ModalAdmin(props) {
 
                             <div className="blockModal">
                                 <div className="block1RG">
-                                    <Input autoComplete="off"
+                                    <Input
+                                        autoComplete="off"
                                         size="large"
                                         icon="envelope"
                                         iconPosition="left"
@@ -209,7 +213,8 @@ function ModalAdmin(props) {
                                     />
                                 </div>
                                 <div className="block2RG">
-                                    <Input autoComplete="off"
+                                    <Input
+                                        autoComplete="off"
                                         size="large"
                                         icon="call"
                                         iconPosition="left"
@@ -241,7 +246,8 @@ function ModalAdmin(props) {
                                     />
                                 </div>
                                 <div className="block2RG">
-                                    <Input autoComplete="off"
+                                    <Input
+                                        autoComplete="off"
                                         size="large"
                                         icon="key"
                                         iconPosition="left"
@@ -296,7 +302,7 @@ function ModalAdmin(props) {
                                 } else {
                                     var success;
                                     if (props.userID) {
-                                        success = await  updateUser(
+                                        success = await updateUser(
                                             props.userID,
                                             stateUser,
                                             props.modifyUser
@@ -311,11 +317,13 @@ function ModalAdmin(props) {
                                                 "Ha ocurrido un error al actualizar el usuario! Verifique que el correo sea unico."
                                             );
                                         }
-                                        
                                     } else {
-                                        success = await createUser(stateUser, props.addUser);
+                                        success = await createUser(
+                                            stateUser,
+                                            props.addUser
+                                        );
                                         setSuccess(success);
-    
+
                                         if (success) {
                                             setMessage(
                                                 "Se ha creado el usuario de manera exitosa!"
@@ -327,13 +335,13 @@ function ModalAdmin(props) {
                                         }
                                     }
                                 }
-                            
+
                                 // Funcion de insertar nuevo usuario
                             } else {
                                 setMessage(
                                     "Debe llenar todos los campos para que el registro sea exitoso"
-								);
-								setSuccess(false);
+                                );
+                                setSuccess(false);
                             }
 
                             setSecondOpen(true);
@@ -361,13 +369,13 @@ function ModalAdmin(props) {
                             color="red"
                             inverted
                             onClick={() => {
-								setSecondOpen(false);
-								if (success) {
-									handleRestablecer();
-									setState({open: false});
-									props.closeModal();
-								}
-							}}
+                                setSecondOpen(false);
+                                if (success) {
+                                    handleRestablecer();
+                                    setState({ open: false });
+                                    props.closeModal();
+                                }
+                            }}
                         >
                             <Icon name="cancel" /> Cerrar
                         </Button>

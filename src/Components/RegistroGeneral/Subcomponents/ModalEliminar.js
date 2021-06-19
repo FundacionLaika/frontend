@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Button, Icon, Modal } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
-
-
+import api from "../../SharedComponents/APIConfig";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -34,12 +33,11 @@ const ModalExampleSize = (props) => {
 
     const [operationOutput, setOperationOutput] = useState(false);
 
-	const history = useHistory();
-
+    const history = useHistory();
 
     async function deleteAnimal(animalID) {
         console.log("id animal", animalID);
-        var response = await fetch("https://fundacionlaika.herokuapp.com/eliminarAnimal", {
+        var response = await fetch(api.url + "/eliminarAnimal", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ ID_Animal: animalID }),
@@ -128,9 +126,9 @@ const ModalExampleSize = (props) => {
                         inverted
                         onClick={() => {
                             dispatch({ type: "close2" });
-							if (operationOutput) {
-								history.push('/Laika/Consulta/');
-							}
+                            if (operationOutput) {
+                                history.push("/Laika/Consulta/");
+                            }
                         }}
                     >
                         <Icon name="cancel" />
