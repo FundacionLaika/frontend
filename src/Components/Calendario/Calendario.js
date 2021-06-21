@@ -78,6 +78,8 @@ function decodeEvents(encodedEvents) {
         const animalName = animal["Nombre"];
         const animalSpecie = animal["Especie"];
 
+        console.log("animal: " + animal);
+
         for (const event in animal) {
             const eventDate = animal[event];
             if (!eventDate) continue;
@@ -94,8 +96,17 @@ function decodeEvents(encodedEvents) {
 
                 const vacuna = decoder[event][animalSpecie];
 
+                const numFecha = event.charAt(event.length - 1);
+                const estaVacuando = animal["vacuna" + numFecha];
+
+                console.log("esta vacuando " + estaVacuando);
+                const mensaje =
+                    estaVacuando === 1
+                        ? "Se aplico vacuna" + vacuna + " a "
+                        : "Cita agendada de vacuna " + vacuna + " de ";
+
                 const generatedEvent = generateEvent(
-                    "Se aplico vacuna " + vacuna + " a ",
+                    mensaje,
                     animalId,
                     animalName,
                     eventDate
