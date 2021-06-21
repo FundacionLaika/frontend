@@ -39,9 +39,7 @@ function decodeEvents(encodedEvents) {
 
     const decoder = {
         FechaRescate: "Se rescato a ",
-        FechaEsterilizacion: "Se esterilizo a ",
         FechaInicioHT: "Inicio de Hogar Temporal de ",
-        FechaFinalHT: "Fin de Hogar Temporal de ",
         VisitaAdopcion: "Se realizo visita de adopcion a ",
         FechaAdopcion: "Se adopto a ",
         FechaVacuna1: {
@@ -99,10 +97,9 @@ function decodeEvents(encodedEvents) {
                 const numFecha = event.charAt(event.length - 1);
                 const estaVacuando = animal["vacuna" + numFecha];
 
-                console.log("esta vacuando " + estaVacuando);
                 const mensaje =
                     estaVacuando === 1
-                        ? "Se aplico vacuna" + vacuna + " a "
+                        ? "Se aplico vacuna " + vacuna + " a "  
                         : "Cita agendada de vacuna " + vacuna + " de ";
 
                 const generatedEvent = generateEvent(
@@ -124,6 +121,22 @@ function decodeEvents(encodedEvents) {
                     eventsList.push(generatedEvent);
                     console.log(generatedEvent);
                 });
+            } else if (event == "FechaEsterilizacion") {
+                const estaEsterilizado = animal["EstaEsterilizado"];
+                const mensaje =
+                    estaEsterilizado == "Sí" || estaEsterilizado == "Si"
+                        ? "Se esterilizo a "
+                        : "Cita agendada de esterilizacion de ";
+
+                console.log(estaEsterilizado);
+
+                const generatedEvent = generateEvent(
+                    mensaje,
+                    animalId,
+                    animalName,
+                    eventDate
+                );
+                eventsList.push(generatedEvent);
             } else {
                 if (!decoder[event]) continue;
                 const generatedEvent = generateEvent(

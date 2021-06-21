@@ -1,4 +1,4 @@
-const debugMode = false;
+const debugMode = true;
 
 const api = {
     "url": debugMode ? "http://localhost:3000" : "https://fundacionlaika.herokuapp.com"
