@@ -121,10 +121,10 @@ function decodeEvents(encodedEvents) {
                     eventsList.push(generatedEvent);
                     console.log(generatedEvent);
                 });
-            } else if (event == "FechaEsterilizacion") {
+            } else if (event === "FechaEsterilizacion") {
                 const estaEsterilizado = animal["EstaEsterilizado"];
                 const mensaje =
-                    estaEsterilizado == "Sí" || estaEsterilizado == "Si"
+                    estaEsterilizado === "Sí" || estaEsterilizado === "Si"
                         ? "Se esterilizo a "
                         : "Cita agendada de esterilizacion de ";
 
