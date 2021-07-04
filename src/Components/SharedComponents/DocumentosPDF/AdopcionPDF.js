@@ -26,7 +26,8 @@ export function AdopcionPDF(doc, data) {
 	doc.text("Datos adopción", 27, 40);
 	doc.setFontSize(14);
 	doc.setFont("Raleway-Regular", "normal");	
-	doc.text("Adoptante: " + validInfo(data.adopcion.adoptante), 15, 53);
+	var Adoptante = doc.splitTextToSize("Adoptante: " + validInfo(data.adopcion.adoptante), 90);
+	doc.text(Adoptante, 15, 53);
 	doc.text("Adoptado: " + validInfo(data.adopcion.adoptado), 15, 63);
 	doc.text("Medio de adopción: " + validInfo(data.adopcion.medioAdopcion), 15, 73);
 	doc.text("Petco ID: " + validInfo(data.adopcion.idPETCO), 15, 83);
@@ -48,9 +49,11 @@ export function AdopcionPDF(doc, data) {
 	doc.text("Dirección Adoptante", 27, 109);
 	doc.setFontSize(14);
 	doc.setFont("Raleway-Regular", "normal");	
-	doc.text("Calle: " + validInfo(data.adopcion.calle), 15, 122);
+	var Calle = doc.splitTextToSize("Calle: " + validInfo(data.adopcion.calle), 90);
+	var Colonia = doc.splitTextToSize("Colonia: " + validInfo(data.adopcion.colonia), 90);
+	doc.text(Calle, 15, 122);
 	doc.text("Número: " + validInfo(data.adopcion.numero), 115, 122);
-	doc.text("Colonia: " + validInfo(data.adopcion.colonia), 15, 132);
+	doc.text(Colonia, 15, 132);
 	doc.text("Municipio: " + validInfo(data.adopcion.municipio), 115, 132);
 
 	doc.setFontSize(19);

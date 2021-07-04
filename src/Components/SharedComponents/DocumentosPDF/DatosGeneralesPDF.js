@@ -1,4 +1,4 @@
-import { formatDate } from "../../SharedFunctions/PDFfunctions";
+import { formatDate, validInfo } from "../../SharedFunctions/PDFfunctions";
 import { LaikaLogo } from "./Images/LaikaLogo";
 import { GeneralData } from "./Images/GeneralData";
 import { AddressBook } from "./Images/AddressBook";
@@ -42,9 +42,11 @@ export function DatosGeneralesPDF(doc, data) {
 	doc.text("Dirección de rescate", 27, 105);
 	doc.setFont("Raleway-Regular", "normal");	
 	doc.setFontSize(14);
-	doc.text("Calle: " + data.registroGeneral.calle, 15, 118);
-	doc.text("Número: " + data.registroGeneral.numero, 115, 118);
-	doc.text("Colonia: " + data.registroGeneral.colonia, 15, 128);
+	var Calle = doc.splitTextToSize("Calle: " + validInfo(data.registroGeneral.calle), 90);
+	var Colonia = doc.splitTextToSize("Colonia: " + validInfo(data.registroGeneral.colonia), 90);
+	doc.text(Calle, 15, 118);
+	doc.text(validInfo("Número: " + data.registroGeneral.numero), 115, 118);
+	doc.text(Colonia, 15, 128);
 	doc.text("Municipio: " + data.registroGeneral.municipio, 115, 128);
 
 
