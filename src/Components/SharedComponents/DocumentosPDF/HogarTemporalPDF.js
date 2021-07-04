@@ -47,9 +47,11 @@ export function HogarTemporalPDF(doc, data) {
 	doc.text("Dirección HT", 27, 105);
 	doc.setFontSize(14);
 	doc.setFont("Raleway-Regular", "normal");	
-	doc.text("Calle: " + validInfo(data.hogarTemporal.calle), 15, 118);
+	var Calle = doc.splitTextToSize("Calle: " + validInfo(data.hogarTemporal.calle), 90);
+	var Colonia = doc.splitTextToSize("Colonia: " + validInfo(data.hogarTemporal.colonia), 90);
+	doc.text(Calle, 15, 118);
 	doc.text("Número: " + validInfo(data.hogarTemporal.numero), 115, 118);
-	doc.text("Colonia: " + validInfo(data.hogarTemporal.colonia), 15, 128);
+	doc.text(Colonia, 15, 128);
 	doc.text("Municipio: " + validInfo(data.hogarTemporal.municipio), 115, 128);
 
 	doc.setFontSize(19);
